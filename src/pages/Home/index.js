@@ -11,13 +11,11 @@ const Home = () => {
     }
 
     //Pega um numéro aleatório dentre o tamanho da lista de países
-    let number = getRandomInt(0,3);
-    //Define um país inicial aleatório
-    let code = Countries[number][0];
+    let id = getRandomInt(0,3);
 
     return(
         <div>
-            <button><Link to={{pathname: `flags/${code}`}}>Start</Link></button>
+            <button><Link to={{pathname: `flags/${id}`}}>Start</Link></button>
         </div>
     );
 }
