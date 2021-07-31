@@ -1,11 +1,16 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
-const Score = (props) => {
+const Score = () => {
+    const history = useHistory();
     const location = useLocation();
     let score = location.state.score;
+
     return(
-        <p>A sua pontuação é: {score*100} de 500</p>
+        <div>
+            <p>A sua pontuação é: {score*100} de 500</p>
+            <button onClick = {() => history.push('/')}>Retornar à página inicial</button>
+        </div>
     );
 }
 

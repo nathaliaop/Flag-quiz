@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Countries from '../../resources/countries';
 
 const Home = () => {
     //Pega um numéro aleatório dentre o tamanho da lista de países
