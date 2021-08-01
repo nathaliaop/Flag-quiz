@@ -17,7 +17,7 @@ const Flags = () => {
     const history = useHistory();
     //Armazena o código do país em id
     let { id } = useParams();
-    if (used == []) used.push(id);
+    if (used === []) used.push(id);
     console.log(used);
 
     //Pega um número aleatório
@@ -57,7 +57,7 @@ const Flags = () => {
         setQuestions(questions-1);
         //Aumenta o score se a resposta for correta e informa que a resposta foi correta
         //Compara a resposta em letras minúsculas e sem acentos ou caracteres especiais
-        if (answer.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") == country.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")) {
+        if (answer.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") === country.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")) {
             setScore(score+1);
             setCorrect(true)
         }
@@ -110,7 +110,7 @@ const Flags = () => {
             <Styled.Result>
                 <Styled.Image src={`https://www.countryflags.io/${code}/flat/64.png`}/>
                 {correct ? <Styled.Correct>Resposta correta!</Styled.Correct> : <div><Styled.Correct>A resposta certa era: </Styled.Correct> <Styled.Correct>{country}</Styled.Correct></div>}
-                {questions == 0 ?
+                {questions === 0 ?
                 <Button
                     title="Terminar jogo"
                     onClick={() => history.push({
