@@ -35,7 +35,7 @@ const Flags = () => {
 
     //Usa um state para armazenar o score do usuário e o número de questões antes de o jogo terminar
     const[score, setScore] = useState(0);
-    const[questions, setQuestions] = useState(1);
+    const[questions, setQuestions] = useState(10);
     //Use um state para armazenar se a resposta foi correta ou não
     const[correct, setCorrect] = useState(false);
     //Chave para definir se o qeu vai ser mostrado na tela é a questão ou o feedback do usuário (se acertou ou errou)
@@ -74,13 +74,13 @@ const Flags = () => {
                 <Styled.Title>Que país é esse?</Styled.Title>
                 <Styled.Image key={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`}/>
                 <Styled.Form id='myInput'>
-                    <Styled.Input
+                    <Input
                         type='text'
                         placeholder='Que país é esse?'
                         value={answer}
-                        onChange={(e) => setAnswer(e.target.value)}>
-                    </Styled.Input>
-                    <Styled.Button onClick={(event) =>validateAnswer(event) }>Next</Styled.Button>
+                        changed={setAnswer}>
+                    </Input>
+                    <Button title = "Next" clicked={validateAnswer}/>
                 </Styled.Form>
             </div>
             :
@@ -88,9 +88,9 @@ const Flags = () => {
                 <Styled.Image src={`https://www.countryflags.io/${code}/flat/64.png`}/>
                 {correct ? <Styled.Title>Resposta correta!</Styled.Title> : <Styled.Title>A resposta certa era: {country}</Styled.Title>}
                 {questions == 0 ?
-                <Styled.Button><Link to={{pathname: 'score', state: {score: score}}}>Finish</Link></Styled.Button>
+                <Button title={<Link to={{pathname: 'score', state: {score: score}}}>Finish</Link>} clicked={() => null} />
                 :
-                <Styled.Button onClick={() => setKey(!key)}><Link to={{pathname: `${number}`}}>Next</Link></Styled.Button>}
+                <Button title={<Link to={{pathname: `${number}`}}>Next</Link>} onClick={setKey(!key)} />}
             </Styled.Result>}
         </Styled.Div>
     );

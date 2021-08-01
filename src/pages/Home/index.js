@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../../components/Button';
 
 import * as Styled from './styles';
 
@@ -16,7 +17,7 @@ const Home = () => {
 
     return(
         <Styled.Div>
-            <Styled.Button><Link to={{pathname: `flags/${id}`}}>Start</Link></Styled.Button>
+            <Button title={<Link to={{pathname: `flags/${id}`}}>Start</Link>} clicked={() => null} />
         </Styled.Div>
     );
 }
