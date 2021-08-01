@@ -35,7 +35,7 @@ const Flags = () => {
 
     //Usa um state para armazenar o score do usuário e o número de questões antes de o jogo terminar
     const[score, setScore] = useState(0);
-    const[questions, setQuestions] = useState(3);
+    const[questions, setQuestions] = useState(10);
     //Use um state para armazenar se a resposta foi correta ou não
     const[correct, setCorrect] = useState(false);
     //Chave para definir se o qeu vai ser mostrado na tela é a questão ou o feedback do usuário (se acertou ou errou)

@@ -50,8 +50,9 @@ export const Result = styled.div`
     align-items: center;
     padding: 3rem;
     width: 40%;
-    margin: 7rem;
+    margin: 4rem;
     background-color: #8377D1;
+    border-radius: 50px;
     `
 
 export const Form = styled.div`
