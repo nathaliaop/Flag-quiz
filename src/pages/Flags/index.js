@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Link, useParams, useHistory, Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useParams, useHistory} from 'react-router-dom';
 import LoadingIcons from 'react-loading-icons'
 
 import Countries from '../../resources/countries';
