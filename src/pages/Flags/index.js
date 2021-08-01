@@ -18,7 +18,6 @@ const Flags = () => {
     //Armazena o código do país em id
     let { id } = useParams();
     if (used === []) used.push(id);
-    console.log(used);
 
     //Pega um número aleatório
     const getRandomInt = (min, max, used) => {
