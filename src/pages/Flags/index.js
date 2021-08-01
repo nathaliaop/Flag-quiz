@@ -2,20 +2,28 @@ import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import Countries from '../../resources/countries';
 
+let used = [];
+let min = 0;
+let max = 218;
+
 const Flags = () => {
     const history = useHistory();
     //Armazena o código do país em id
     let { id } = useParams();
+    if (used == []) used.push(id);
+    console.log(used);
 
     //Pega um número aleatório
-    const getRandomInt = (min, max) => {
+    const getRandomInt = (min, max, used) => {
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
+        let random = Math.floor(Math.random() * (max - min)) + min;
+        if (used.includes(random.toString())) getRandomInt(min, max, used);
+        else return random;
     }
 
     //Pega um numéro aleatório dentre o tamanho da lista de países
-    let number = getRandomInt(0,218);
+    let number = getRandomInt(min,max, used);
     //Código de país
     let code = Countries[id][0];
     //País
@@ -28,9 +36,10 @@ const Flags = () => {
     const[correct, setCorrect] = useState(false);
     //Chave para definir se o qeu vai ser mostrado na tela é a questão ou o feedback do usuário (se acertou ou errou)
     const[key, setKey] = useState(true);
-
     //Armazena a resposta do usuário digitada no input
     const [answer, setAnswer] = useState("");
+
+    const [loaded, setLoaded] = useState(false);
 
     //Valida a reposta submetida
     const validateAnswer = (event) => {
@@ -52,14 +61,15 @@ const Flags = () => {
         //Reseta o input de resposta
         setAnswer("");
         setKey(!key);
-        //let number = getRandomInt(0,254);
+        used.push(id);
     }
     
     return(
         <div>
-            {key?
+            {key ?
             <div>
-                <img src={`https://www.countryflags.io/${code}/flat/64.png`}/>
+                    <p>Que país é esse?</p>
+                <img key={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`}/>
                 <form id='myInput'>
                     <input
                         type='text'
@@ -67,7 +77,7 @@ const Flags = () => {
                         value={answer}
                         onChange={(e) => setAnswer(e.target.value)}>
                     </input>
-                    <button onClick={(event) =>validateAnswer(event)}>Next</button>
+                    <button onClick={(event) =>validateAnswer(event) }>Next</button>
                 </form>
             </div>
             :
