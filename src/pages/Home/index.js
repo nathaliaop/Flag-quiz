@@ -10,7 +10,7 @@ const Home = () => {
     }
 
     //Pega um numéro aleatório dentre o tamanho da lista de países
-    let id = getRandomInt(0,3);
+    let id = getRandomInt(0,218);
 
     return(
         <div>

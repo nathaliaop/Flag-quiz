@@ -15,11 +15,11 @@ const Flags = () => {
     }
 
     //Pega um numéro aleatório dentre o tamanho da lista de países
-        let number = getRandomInt(1,3);
-        //Código de país
-        let code = Countries[id][0];
-        //País
-        let country = Countries[id][1];
+    let number = getRandomInt(0,218);
+    //Código de país
+    let code = Countries[id][0];
+    //País
+    let country = Countries[id][1];
 
     //Usa um state para armazenar o score do usuário e o número de questões antes de o jogo terminar
     const[score, setScore] = useState(0);
@@ -40,6 +40,8 @@ const Flags = () => {
         setQuestions(questions-1);
         //Muda a resposta para letras minúsculas
         setAnswer(answer.toLowerCase());
+        //Retira acentos da resposta
+        setAnswer(answer.normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
         //Aumenta o score se a resposta for correta e informa que a resposta foi correta
         if (answer == country.toLowerCase()) {
             setScore(score+1);
@@ -50,6 +52,7 @@ const Flags = () => {
         //Reseta o input de resposta
         setAnswer("");
         setKey(!key);
+        //let number = getRandomInt(0,254);
     }
     
     return(
