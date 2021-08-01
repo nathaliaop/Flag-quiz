@@ -50,7 +50,7 @@ export const Result = styled.div`
     align-items: center;
     padding: 3rem;
     width: 40%;
-    margin: 4rem;
+    margin: 1rem;
     background-color: #8377D1;
     border-radius: 50px;
     `
