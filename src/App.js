@@ -12,7 +12,7 @@ export default function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" children={<Home/>}/>
-          <Route exact path="/flags/score" children={<Score/>}/>
+          <Route path="/score" children={<Score/>}/>
           <Route path="/flags/:id" children={<Flags/>}/>
         </Switch>
       </BrowserRouter>

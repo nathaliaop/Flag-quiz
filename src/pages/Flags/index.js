@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { Link, useParams, useHistory, Redirect } from 'react-router-dom';
 import Countries from '../../resources/countries';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -35,7 +35,7 @@ const Flags = () => {
 
     //Usa um state para armazenar o score do usuário e o número de questões antes de o jogo terminar
     const[score, setScore] = useState(0);
-    const[questions, setQuestions] = useState(10);
+    const[questions, setQuestions] = useState(3);
     //Use um state para armazenar se a resposta foi correta ou não
     const[correct, setCorrect] = useState(false);
     //Chave para definir se o qeu vai ser mostrado na tela é a questão ou o feedback do usuário (se acertou ou errou)
@@ -43,11 +43,11 @@ const Flags = () => {
     //Armazena a resposta do usuário digitada no input
     const [answer, setAnswer] = useState("");
 
-    const [loaded, setLoaded] = useState(false);
+    const [emptyWarn, setEmptyWarn] = useState(false);
 
     //Valida a reposta submetida
     const validateAnswer = (event) => {
-        if (!answer) return;
+        if (!answer) {setEmptyWarn(true); return;}
         //Previne a página de recarregar
         event.preventDefault();
         //Diminui o número de questões
@@ -70,7 +70,7 @@ const Flags = () => {
     return(
         <Styled.Div>
             {key ?
-            <div>
+            <Styled.Result>
                 <Styled.Title>Que país é esse?</Styled.Title>
                 <Styled.Image key={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`}/>
                 <Styled.Form id='myInput'>
@@ -80,17 +80,24 @@ const Flags = () => {
                         value={answer}
                         changed={setAnswer}>
                     </Input>
-                    <Button title = "Next" clicked={validateAnswer}/>
+                    {emptyWarn ? <Styled.Warn>Por favor, insira uma resposta!</Styled.Warn> : null}
+                    <Button title = "Conferir" onClick={validateAnswer}/>
                 </Styled.Form>
-            </div>
+            </Styled.Result>
             :
             <Styled.Result>
                 <Styled.Image src={`https://www.countryflags.io/${code}/flat/64.png`}/>
-                {correct ? <Styled.Title>Resposta correta!</Styled.Title> : <Styled.Title>A resposta certa era: {country}</Styled.Title>}
+                {correct ? <Styled.Correct>Resposta correta!</Styled.Correct> : <Styled.Correct>A resposta certa era: {country}</Styled.Correct>}
                 {questions == 0 ?
-                <Button title={<Link to={{pathname: 'score', state: {score: score}}}>Finish</Link>} clicked={() => null} />
+                <Button
+                    title="Terminar jogo"
+                    onClick={() => history.push({
+                        pathname: '/score',
+                        state: { score: score }
+                    })}
+                />
                 :
-                <Button title={<Link to={{pathname: `${number}`}}>Next</Link>} onClick={setKey(!key)} />}
+                <Link to={{pathname: `${number}`}}><Button title="Próximo" onClick={() => setKey(!key) && history.push(`${number}`)}/></Link>}
             </Styled.Result>}
         </Styled.Div>
     );

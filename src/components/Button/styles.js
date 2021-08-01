@@ -1,15 +1,14 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
-  display: inline-block;
-  width: 12rem;
-
+  width: 19vw;
+  text-decoration: none;
   border-radius: 5px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
-  border: 1px solid white;
-
+  padding: 0.5rem 0rem;
+  margin: 1rem 1rem;
+  border: 1px solid pink;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   cursor: pointer;
-    background: #fa6555;
-    color: white;
+  background: #CF9893;
+  color: #2C0E37;
 `

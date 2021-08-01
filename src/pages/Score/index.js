@@ -11,8 +11,9 @@ const Score = () => {
 
     return(
         <Styled.Div>
-            <Styled.Title>A sua pontuação é: {score*100} de 1000</Styled.Title>
-            <Styled.Button title="Retornar à página inicial" onClick = {history.push('/')} />
+            <Styled.Title>A sua pontuação é: </Styled.Title>
+            <Styled.Title>{score*100} de 1000</Styled.Title>
+            <Button title="Retornar à página inicial" onClick = {() => history.push('/')} />
         </Styled.Div>
     );
 }

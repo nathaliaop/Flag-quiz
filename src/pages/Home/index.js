@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 
 import * as Styled from './styles';
 
 const Home = () => {
+    const history = useHistory();
     //Pega um numéro aleatório dentre o tamanho da lista de países
     const getRandomInt = (min, max) => {
         min = Math.ceil(min);
@@ -17,7 +18,7 @@ const Home = () => {
 
     return(
         <Styled.Div>
-            <Button title={<Link to={{pathname: `flags/${id}`}}>Start</Link>} clicked={() => null} />
+            <Button title="Começar jogo" onClick={() => history.push(`flags/${id}`)} />
         </Styled.Div>
     );
 }

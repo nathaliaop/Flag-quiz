@@ -4,16 +4,39 @@ export const Div = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5rem;
 `
 
 export const Title = styled.p`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: 35px;
-    color: #2C0E37;
+    background-color: #CF9893;
+    border-radius: 10px;
+    padding: 0.5rem 0rem;
+    margin: 1rem 1rem;
+`
+
+export const Warn = styled.p`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background-color: #8377D1;
+    border-radius: 10px;
+    padding: 0.5rem 0rem;
+    margin: 1rem 1rem;
+`
+
+export const Correct = styled.p`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    background-color: #8377D1;
+    border-radius: 10px;
+    padding: 0.5rem 0rem;
+    margin: 1rem 1rem;
 `
 
 export const Image = styled.img`
@@ -25,8 +48,11 @@ export const Result = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 5rem;
-`
+    padding: 3rem;
+    width: 40%;
+    margin: 7rem;
+    background-color: #8377D1;
+    `
 
 export const Form = styled.div`
     display: flex;

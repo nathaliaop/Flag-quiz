@@ -2,10 +2,12 @@ import styled from 'styled-components';
 
 export const Div = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  padding: 20rem;
+  margin: 10rem 30rem;
+  padding: 10rem;
+  background-color: #8377D1;
 `
 
 export const Title = styled.p`

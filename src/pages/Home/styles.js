@@ -4,7 +4,9 @@ export const Div = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 25rem;
+  margin: 10rem 30rem;
+  padding: 15rem;
+  background-color: #8377D1;
 `
 
 export const Button = styled.button`
