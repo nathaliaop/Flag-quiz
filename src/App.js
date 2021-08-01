@@ -3,14 +3,19 @@ import Home from './pages/Home';
 import Flags from './pages/Flags';
 import Score from './pages/Score';
 
+import { GlobalStyle } from "./GlobalStyle"
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" children={<Home/>}/>
-        <Route exact path="/flags/score" children={<Score/>}/>
-        <Route path="/flags/:id" children={<Flags/>}/>
-      </Switch>
-    </BrowserRouter>
+    <div>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" children={<Home/>}/>
+          <Route exact path="/flags/score" children={<Score/>}/>
+          <Route path="/flags/:id" children={<Flags/>}/>
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }

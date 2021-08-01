@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import Countries from '../../resources/countries';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+
+import * as Styled from './styles';
 
 let used = [];
 let min = 0;
@@ -31,7 +35,7 @@ const Flags = () => {
 
     //Usa um state para armazenar o score do usuário e o número de questões antes de o jogo terminar
     const[score, setScore] = useState(0);
-    const[questions, setQuestions] = useState(5);
+    const[questions, setQuestions] = useState(1);
     //Use um state para armazenar se a resposta foi correta ou não
     const[correct, setCorrect] = useState(false);
     //Chave para definir se o qeu vai ser mostrado na tela é a questão ou o feedback do usuário (se acertou ou errou)
@@ -43,16 +47,15 @@ const Flags = () => {
 
     //Valida a reposta submetida
     const validateAnswer = (event) => {
+        if (!answer) return;
         //Previne a página de recarregar
         event.preventDefault();
         //Diminui o número de questões
         setQuestions(questions-1);
-        //Muda a resposta para letras minúsculas
-        setAnswer(answer.toLowerCase());
-        //Retira acentos da resposta
-        setAnswer(answer.normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
+        //Muda a resposta para letras minúsculas e retira acentos e caracteres especiais
+        setAnswer(answer.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
         //Aumenta o score se a resposta for correta e informa que a resposta foi correta
-        if (answer == country.toLowerCase()) {
+        if (answer == country.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")) {
             setScore(score+1);
             setCorrect(true)
         }
@@ -65,31 +68,31 @@ const Flags = () => {
     }
     
     return(
-        <div>
+        <Styled.Div>
             {key ?
             <div>
-                    <p>Que país é esse?</p>
-                <img key={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`}/>
-                <form id='myInput'>
-                    <input
+                <Styled.Title>Que país é esse?</Styled.Title>
+                <Styled.Image key={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`}/>
+                <Styled.Form id='myInput'>
+                    <Styled.Input
                         type='text'
                         placeholder='Que país é esse?'
                         value={answer}
                         onChange={(e) => setAnswer(e.target.value)}>
-                    </input>
-                    <button onClick={(event) =>validateAnswer(event) }>Next</button>
-                </form>
+                    </Styled.Input>
+                    <Styled.Button onClick={(event) =>validateAnswer(event) }>Next</Styled.Button>
+                </Styled.Form>
             </div>
             :
-            <div>
-                <img src={`https://www.countryflags.io/${code}/flat/64.png`}/>
-                {correct ? <h1>Resposta correta!</h1> : <h1>A resposta certa era: {country}</h1>}
+            <Styled.Result>
+                <Styled.Image src={`https://www.countryflags.io/${code}/flat/64.png`}/>
+                {correct ? <Styled.Title>Resposta correta!</Styled.Title> : <Styled.Title>A resposta certa era: {country}</Styled.Title>}
                 {questions == 0 ?
-                <button><Link to={{pathname: 'score', state: {score: score}}}>Finish</Link></button>
+                <Styled.Button><Link to={{pathname: 'score', state: {score: score}}}>Finish</Link></Styled.Button>
                 :
-                <button onClick={() => setKey(!key)}><Link to={{pathname: `${number}`}}>Next</Link></button>}
-            </div>}
-        </div>
+                <Styled.Button onClick={() => setKey(!key)}><Link to={{pathname: `${number}`}}>Next</Link></Styled.Button>}
+            </Styled.Result>}
+        </Styled.Div>
     );
 }
 
