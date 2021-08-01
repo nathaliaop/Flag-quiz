@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useParams, useHistory, Redirect } from 'react-router-dom';
+import LoadingIcons from 'react-loading-icons'
+
 import Countries from '../../resources/countries';
+import NotFound from '../../images/rip.png';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
@@ -8,7 +11,7 @@ import * as Styled from './styles';
 
 let used = [];
 let min = 0;
-let max = 218;
+let max = 215;
 
 const Flags = () => {
     const history = useHistory();
@@ -42,12 +45,12 @@ const Flags = () => {
     const[key, setKey] = useState(true);
     //Armazena a resposta do usuário digitada no input
     const [answer, setAnswer] = useState("");
-
-    const [emptyWarn, setEmptyWarn] = useState(false);
+    //Avisa o usuário se o input estiver em branco
+    const [warn, setWarn] = useState(false);
 
     //Valida a reposta submetida
     const validateAnswer = (event) => {
-        if (!answer) {setEmptyWarn(true); return;}
+        if (!answer) {setWarn(true); return;}
         //Previne a página de recarregar
         event.preventDefault();
         //Diminui o número de questões
@@ -65,29 +68,48 @@ const Flags = () => {
         setAnswer("");
         setKey(!key);
         used.push(id);
+        setLoading(true);
     }
-    
+
+    //LoadingIcons.Circles LoadingIcons.BallTriangle LoadingIcons.Oval
+
+    //Verifica se a imagem já carregou
+    const [loading, setLoading] = useState(true);
+    const imageLoaded = () => {
+        setLoading(false);
+    }
+
+    //Se a imagem não existir, carrega uma imagem padrão
+    const addDefaultSrc = (event) => {
+        event.target.src = NotFound
+    }
+
     return(
         <Styled.Div>
             {key ?
             <Styled.Result>
                 <Styled.Title>Que país é esse?</Styled.Title>
-                <Styled.Image key={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`}/>
-                <Styled.Form id='myInput'>
+                <div style={{display: loading ? "flex" : "none"}}>
+                    <LoadingIcons.Circles />
+                </div>
+                <div style={{display: loading ? "none" : "flex"}}>
+                    <Styled.Image key={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`} onLoad={imageLoaded} onError={addDefaultSrc}/>
+                </div>
+                <Styled.Form>
                     <Input
-                        type='text'
-                        placeholder='Que país é esse?'
+                        type="text"
+                        placeholder='Digite aqui a sua resposta'
                         value={answer}
-                        changed={setAnswer}>
+                        onChange={setAnswer}>
                     </Input>
-                    {emptyWarn ? <Styled.Warn>Por favor, insira uma resposta!</Styled.Warn> : null}
-                    <Button title = "Conferir" onClick={validateAnswer}/>
+                    {warn ? <Styled.Warn>Por favor, insira uma resposta!</Styled.Warn> : null}
+                    <button type="submit"onClick={(event) => validateAnswer(event)}>conferir</button>
                 </Styled.Form>
             </Styled.Result>
             :
             <Styled.Result>
                 <Styled.Image src={`https://www.countryflags.io/${code}/flat/64.png`}/>
-                {correct ? <Styled.Correct>Resposta correta!</Styled.Correct> : <Styled.Correct>A resposta certa era: {country}</Styled.Correct>}
+                {correct ? <Styled.Correct>Resposta correta!</Styled.Correct> : <div><Styled.Correct>A resposta certa era: </Styled.Correct> <Styled.Correct>{country}</Styled.Correct></div>}
                 {questions == 0 ?
                 <Button
                     title="Terminar jogo"

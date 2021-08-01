@@ -14,7 +14,7 @@ const Home = () => {
     }
 
     //Pega um numéro aleatório dentre o tamanho da lista de países
-    let id = getRandomInt(0,218);
+    let id = getRandomInt(0,215);
 
     return(
         <Styled.Div>

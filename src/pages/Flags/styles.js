@@ -58,7 +58,7 @@ export const Result = styled.div`
 export const Form = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
 `
 
 export const Input = styled.input`
