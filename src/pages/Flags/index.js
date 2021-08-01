@@ -55,10 +55,9 @@ const Flags = () => {
         event.preventDefault();
         //Diminui o número de questões
         setQuestions(questions-1);
-        //Muda a resposta para letras minúsculas e retira acentos e caracteres especiais
-        setAnswer(answer.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
         //Aumenta o score se a resposta for correta e informa que a resposta foi correta
-        if (answer == country.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")) {
+        //Compara a resposta em letras minúsculas e sem acentos ou caracteres especiais
+        if (answer.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") == country.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")) {
             setScore(score+1);
             setCorrect(true)
         }
@@ -69,6 +68,7 @@ const Flags = () => {
         setKey(!key);
         used.push(id);
         setLoading(true);
+        setWarn(false);
     }
 
     //LoadingIcons.Circles LoadingIcons.BallTriangle LoadingIcons.Oval
@@ -103,7 +103,7 @@ const Flags = () => {
                         onChange={setAnswer}>
                     </Input>
                     {warn ? <Styled.Warn>Por favor, insira uma resposta!</Styled.Warn> : null}
-                    <button type="submit"onClick={(event) => validateAnswer(event)}>conferir</button>
+                    <Button title="Conferir"onClick={(event) => validateAnswer(event)}/>
                 </Styled.Form>
             </Styled.Result>
             :
