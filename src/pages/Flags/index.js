@@ -38,12 +38,13 @@ const Flags = () => {
       }, [])
 
     const getCountry = () => {
+        setFlag("");
+        setPage(!page);
         let country = randomCountry();
         axios.get('https://restcountries.eu/rest/v2/alpha/' + country)
           .then(result => {
                 setName(result.data.translations.pt);
                 setFlag(result.data.flag);
-                setPage(!page);
           });
     }
 
@@ -55,10 +56,12 @@ const Flags = () => {
         //Previne a página de recarregar
         event.preventDefault();
         setQuestions(questions-1);
-        //Compara a resposta em letras minúsculas e sem acentos ou caracteres especiais
-        if (answer.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') === name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')) {
-            setScore(score+1);
-            setCorrect(true);
+        if (name) {
+            //Compara a resposta em letras minúsculas e sem acentos ou caracteres especiais
+            if (answer.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') === name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')) {
+                setScore(score+1);
+                setCorrect(true);
+            }
         }
         else setCorrect(false);
         //Reseta o input de resposta
