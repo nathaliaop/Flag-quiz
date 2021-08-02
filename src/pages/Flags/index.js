@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory} from 'react-router-dom';
-import LoadingIcons from 'react-loading-icons'
 import axios from 'axios';
 
 import Loading from '../../images/loading.gif';
@@ -11,7 +10,6 @@ import * as Styled from './styles';
 
 const Flags = () => {
     const history = useHistory();
-    var randomCountry = require('random-country');
 
     const [name, setName] = useState(0);
     const [flag, setFlag] = useState(10);
@@ -27,24 +25,30 @@ const Flags = () => {
     const [warn, setWarn] = useState(false);
 
     useEffect((page) => {
-        var randomCountry = require('random-country');
-        let country = randomCountry();
-        axios.get('https://restcountries.eu/rest/v2/alpha/' + country)
+        let number = Math.floor(Math.random() * 250);
+        axios.get('https://restcountries.eu/rest/v2/all')
           .then(result => {
-                setName(result.data.translations.pt);
-                setFlag(result.data.flag);
+                setName(result.data[number].name);
+                setFlag(result.data[number].flag);
                 setPage(!page);
+          })
+          .catch(error => {
+            console.error(error);
           });
-      }, [])
+    }, [])
 
     const getCountry = () => {
         setFlag("");
         setPage(!page);
-        let country = randomCountry();
-        axios.get('https://restcountries.eu/rest/v2/alpha/' + country)
+        let number = Math.floor(Math.random() * 250);
+        axios.get('https://restcountries.eu/rest/v2/all')
           .then(result => {
-                setName(result.data.translations.pt);
-                setFlag(result.data.flag);
+                setName(result.data[number].name);
+                setFlag(result.data[number].flag);
+                setPage(!page);
+          })
+          .catch(error => {
+            console.error(error);
           });
     }
 
