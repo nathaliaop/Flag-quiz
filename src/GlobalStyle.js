@@ -3,9 +3,8 @@ import img from './images/flags.jpg';
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: "Raleway", cursive;
     color: #2C0E37;
-    background-color: #8377D1;
     background-image: url(${img});
   }
 `

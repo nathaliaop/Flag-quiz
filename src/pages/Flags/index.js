@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useParams, useHistory} from 'react-router-dom';
+import { useParams, useHistory} from 'react-router-dom';
 import LoadingIcons from 'react-loading-icons'
+import { countries } from 'country-data';
 
 import Countries from '../../resources/countries';
 import NotFound from '../../images/rip.png';
@@ -9,7 +10,6 @@ import Input from '../../components/Input';
 
 import * as Styled from './styles';
 
-let used = [];
 let min = 0;
 let max = 215;
 
@@ -17,31 +17,36 @@ const Flags = () => {
     const history = useHistory();
     //Armazena o código do país em id
     let { id } = useParams();
-    if (used === []) used.push(id);
+
+    //Define um país aleatório
+    var randomCountry = require('random-country');
+    var c =  randomCountry();
+
+    console.log(c)
 
     //Pega um número aleatório
-    const getRandomInt = (min, max, used) => {
+    const getRandomInt = (min, max) => {
         min = Math.ceil(min);
         max = Math.floor(max);
-        let random = Math.floor(Math.random() * (max - min)) + min;
-        if (used.includes(random.toString())) getRandomInt(min, max, used);
-        else return random;
+        return Math.floor(Math.random() * (max - min)) + min;
     }
-
+    console.log(id)
+    
     //Pega um numéro aleatório dentre o tamanho da lista de países
-    let number = getRandomInt(min,max, used);
+    let number = getRandomInt(min,max);
+    console.log(number)
     //Código de país
     let code = Countries[id][0];
     //País
     let country = Countries[id][1];
 
     //Usa um state para armazenar o score do usuário e o número de questões antes de o jogo terminar
-    const[score, setScore] = useState(0);
-    const[questions, setQuestions] = useState(10);
+    const [score, setScore] = useState(0);
+    const [questions, setQuestions] = useState(10);
     //Use um state para armazenar se a resposta foi correta ou não
-    const[correct, setCorrect] = useState(false);
-    //Chave para definir se o qeu vai ser mostrado na tela é a questão ou o feedback do usuário (se acertou ou errou)
-    const[key, setKey] = useState(true);
+    const [correct, setCorrect] = useState(false);
+    //Chave para definir se o que vai ser mostrado na tela é a questão ou o feedback do usuário (se acertou ou errou)
+    const [page, setPage] = useState(true);
     //Armazena a resposta do usuário digitada no input
     const [answer, setAnswer] = useState("");
     //Avisa o usuário se o input estiver em branco
@@ -49,7 +54,10 @@ const Flags = () => {
 
     //Valida a reposta submetida
     const validateAnswer = (event) => {
-        if (!answer) {setWarn(true); return;}
+        if (!answer) {
+            setWarn(true);
+            return;
+        }
         //Previne a página de recarregar
         event.preventDefault();
         //Diminui o número de questões
@@ -64,10 +72,9 @@ const Flags = () => {
         else setCorrect(false)
         //Reseta o input de resposta
         setAnswer("");
-        setKey(!key);
-        used.push(id);
         setLoading(true);
         setWarn(false);
+        setPage(!page);
     }
 
     //LoadingIcons.Circles LoadingIcons.BallTriangle LoadingIcons.Oval
@@ -83,9 +90,15 @@ const Flags = () => {
         event.target.src = NotFound
     }
 
+    const changePage = (page, setPage) => {
+        history.push(`${number}`)
+        setPage(!page)
+
+    }
+
     return(
         <Styled.Div>
-            {key ?
+            {page ?
             <Styled.Result>
                 <Styled.Info>
                     <Styled.Score>Pontuação: {score*100}/1000</Styled.Score>
@@ -96,33 +109,35 @@ const Flags = () => {
                     <LoadingIcons.Circles />
                 </div>
                 <div style={{display: loading ? "none" : "flex"}}>
-                    <Styled.Image key={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`} onLoad={imageLoaded} onError={addDefaultSrc}/>
+                    <Styled.Image page={Date.now()} src={`https://www.countryflags.io/${code}/flat/64.png`} onLoad={imageLoaded} onError={addDefaultSrc}/>
                 </div>
                 <Styled.Form>
                     <Input
                         type="text"
-                        placeholder='Digite aqui a sua resposta'
+                        placeholder="Resposta"
                         value={answer}
-                        onChange={setAnswer}>
-                    </Input>
+                        onChange={setAnswer}
+                    />
+
                     {warn ? <Styled.Warn>Por favor, insira uma resposta!</Styled.Warn> : null}
-                    <Button title="Conferir"onClick={(event) => validateAnswer(event)}/>
+
+                    <Button onClick={(event) => validateAnswer(event)}>Conferir</Button>
                 </Styled.Form>
             </Styled.Result>
             :
             <Styled.Result>
                 <Styled.Image src={`https://www.countryflags.io/${code}/flat/64.png`}/>
-                {correct ? <Styled.Correct>Resposta correta!</Styled.Correct> : <div><Styled.Correct>A resposta certa era: </Styled.Correct> <Styled.Correct>{country}</Styled.Correct></div>}
+                {correct ? <div><Styled.Correct>Resposta correta </Styled.Correct> <Styled.Correct>Parabéns!</Styled.Correct></div> : <div><Styled.Correct>A resposta certa era: </Styled.Correct> <Styled.Correct>{country}</Styled.Correct></div>}
                 {questions === 0 ?
                 <Button
-                    title="Terminar jogo"
                     onClick={() => history.push({
                         pathname: '/score',
                         state: { score: score }
                     })}
-                />
+                >Terminar jogo</Button>
                 :
-                <Link to={{pathname: `${number}`}}><Button title="Próximo" onClick={() => setKey(!key) && history.push(`${number}`)}/></Link>}
+                
+                <Button onClick={() => changePage(page, setPage)}>Próximo</Button>}
             </Styled.Result>}
         </Styled.Div>
     );

@@ -18,7 +18,7 @@ const Home = () => {
 
     return(
         <Styled.Div>
-            <Button title="Começar jogo" onClick={() => history.push(`flags/${id}`)} />
+            <Button onClick={() => history.push(`flags/${id}`)}>Começar jogo</Button>
         </Styled.Div>
     );
 }

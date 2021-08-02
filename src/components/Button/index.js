@@ -1,10 +1,10 @@
 import React from 'react';
 import * as Styled from './styles';
 
-const Button = ({title, onClick}) => {
+const Button = ({onClick, children}) => {
     return (
         <Styled.Button onClick={(event) => onClick(event)}>
-            {title}
+            {children}
         </Styled.Button>
     );
 };

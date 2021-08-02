@@ -13,7 +13,7 @@ const Score = () => {
         <Styled.Div>
             <Styled.Title>A sua pontuação é: </Styled.Title>
             <Styled.Title>{score*100} de 1000</Styled.Title>
-            <Button title="Retornar à página inicial" onClick = {() => history.push('/')} />
+            <Button onClick = {() => history.push('/')}>Retornar à página inicial</Button>
         </Styled.Div>
     );
 }
