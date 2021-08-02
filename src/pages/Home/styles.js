@@ -4,8 +4,8 @@ export const Div = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5rem 30rem;
-  padding: 16rem;
+  margin: 5% 30%;
+  padding: 16%;
   background-color: #8377D1;
   border-radius: 50px;
 `

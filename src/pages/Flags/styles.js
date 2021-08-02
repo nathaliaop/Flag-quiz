@@ -48,9 +48,9 @@ export const Result = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 3rem;
+    padding: 3%;
     width: 40%;
-    margin: 1rem;
+    margin: 1%;
     background-color: #8377D1;
     border-radius: 50px;
     `
