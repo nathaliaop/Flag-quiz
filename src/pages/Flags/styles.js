@@ -33,7 +33,7 @@ export const Correct = styled.p`
     align-items: center;
     font-size: 35px;
     background-color: #8377D1;
-    border-radius: 10px;
+    padding: 2rem;
 `
 
 export const Image = styled.img`
@@ -49,9 +49,10 @@ export const Question = styled.div`
     width: 50%;
     height: 95vh;
     background-color: #8377D1;
-    margin: 0.4rem;
     border-radius: 50px;
-    `
+    margin: 0.2rem 0rem;
+    padding: 0.5rem 0rem;
+`
 
 export const Result = styled.div`
     display: flex;
@@ -61,9 +62,10 @@ export const Result = styled.div`
     width: 50%;
     height: 95vh;
     background-color: #8377D1;
-    margin: 0.5rem;
     border-radius: 50px;
-    `
+    margin: 0.2rem 0rem;
+    padding: 0.5rem 0rem;
+`
 
 export const Form = styled.div`
     display: flex;

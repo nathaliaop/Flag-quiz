@@ -16,7 +16,7 @@ const Flags = () => {
     const [name, setName] = useState(0);
     const [flag, setFlag] = useState(10);
     //Define se o que vai ser mostrado na tela é a pergunta ou a resposta
-    const [page, setPage] = useState(false);
+    const [page, setPage] = useState(true);
     const [score, setScore] = useState(0);
     const [questions, setQuestions] = useState(10);
     //Verifica se a resposta foi correta ou não
@@ -109,7 +109,7 @@ const Flags = () => {
                     </Styled.Form>
                 </Styled.Question>
             :
-                <Styled.Result>
+                        <Styled.Result>
                                     <Styled.Info>
                         <Styled.Score>Pontuação: {score*100}/1000</Styled.Score>
                         <Styled.Score>Questões: {11 - questions}/10</Styled.Score>
@@ -127,7 +127,7 @@ const Flags = () => {
                             <Styled.Correct>{name}</Styled.Correct>
                         </div>
                     }
-                    
+
                     {questions === 0 ?
                         <Button
                             onClick={() => history.push({
