@@ -3,7 +3,7 @@ import { useHistory} from 'react-router-dom';
 import LoadingIcons from 'react-loading-icons'
 import axios from 'axios';
 
-import NotFound from '../../images/rip.png';
+import Loading from '../../images/loading.gif';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
@@ -79,7 +79,7 @@ const Flags = () => {
 
     //Se a imagem não existir, carrega uma imagem padrão
     const addDefaultSrc = (event) => {
-        event.target.src = NotFound;
+        event.target.src = Loading;
     }
 
     return(
@@ -93,7 +93,7 @@ const Flags = () => {
                     </Styled.Info>
                     <Styled.Title>Que país é esse?</Styled.Title>
                     <div style={{display: loading ? 'flex' : 'none'}}>
-                        <LoadingIcons.Circles />
+                        <Styled.Image src={Loading}/>
                     </div>
                     <div style={{display: loading ? 'none' : 'flex'}}>
                         <Styled.Image src={flag} onLoad={imageLoaded} onError={addDefaultSrc}/>
