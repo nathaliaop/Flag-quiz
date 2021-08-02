@@ -5,21 +5,17 @@ export const Div = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5rem 30rem;
-  padding: 8rem;
+  margin: 4% 29%;
+  padding: 7%;
   background-color: #8377D1;
   border-radius: 50px;
 `
 
 export const Title = styled.p`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    font-size: 35px;
-    color: #2C0E37;
-`
-
-export const Button = styled.button`
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 35px;
+  color: #2C0E37;
 `

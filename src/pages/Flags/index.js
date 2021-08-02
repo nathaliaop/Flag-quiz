@@ -87,6 +87,10 @@ const Flags = () => {
         <Styled.Div>
             {key ?
             <Styled.Result>
+                <Styled.Info>
+                    <Styled.Score>Pontuação: {score}/1000</Styled.Score>
+                    <Styled.Score>Questões: {11 - questions}/10</Styled.Score>
+                </Styled.Info>
                 <Styled.Title>Que país é esse?</Styled.Title>
                 <div style={{display: loading ? "flex" : "none"}}>
                     <LoadingIcons.Circles />

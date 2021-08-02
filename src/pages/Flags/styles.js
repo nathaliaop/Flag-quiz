@@ -48,9 +48,9 @@ export const Result = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 3%;
+    padding: 1%;
     width: 40%;
-    margin: 1%;
+    margin: 0.5%;
     background-color: #8377D1;
     border-radius: 50px;
     `
@@ -61,10 +61,19 @@ export const Form = styled.div`
     align-items: center;
 `
 
-export const Input = styled.input`
-    margin-bottom: 3rem;
+export const Info = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
-export const Button = styled.button`
-    
+export const Score = styled.p`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    background-color: #8377D1;
+    border-radius: 10px;
+    padding: 0.5rem 0rem;
+    margin: 1rem 1rem;
 `
