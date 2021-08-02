@@ -15,31 +15,37 @@ const Flags = () => {
 
     const [name, setName] = useState(0);
     const [flag, setFlag] = useState(10);
-
-    const getCountry = () => {
-        let country = randomCountry();  
-        axios.get('https://restcountries.eu/rest/v2/alpha/' + country)
-          .then(result => {
-                setName(result.data.translations.pt)
-                setFlag(result.data.flag)
-                setPage(!page);
-          });
-    }
-
-    useEffect (() => {
-        getCountry();
-    }, [])
-
+    //Define se o que vai ser mostrado na tela é a pergunta ou a resposta
+    const [page, setPage] = useState(false);
     const [score, setScore] = useState(0);
     const [questions, setQuestions] = useState(10);
     //Verifica se a resposta foi correta ou não
     const [correct, setCorrect] = useState(false);
-    //Define se o que vai ser mostrado na tela é a pergunta ou a resposta
-    const [page, setPage] = useState(false);
     //Armazena a resposta do usuário
     const [answer, setAnswer] = useState('');
     //Avisa ao usuário se o input estiver em branco
     const [warn, setWarn] = useState(false);
+
+    useEffect((page) => {
+        var randomCountry = require('random-country');
+        let country = randomCountry();
+        axios.get('https://restcountries.eu/rest/v2/alpha/' + country)
+          .then(result => {
+                setName(result.data.translations.pt);
+                setFlag(result.data.flag);
+                setPage(!page);
+          });
+      }, [])
+
+    const getCountry = () => {
+        let country = randomCountry();
+        axios.get('https://restcountries.eu/rest/v2/alpha/' + country)
+          .then(result => {
+                setName(result.data.translations.pt);
+                setFlag(result.data.flag);
+                setPage(!page);
+          });
+    }
 
     const validateAnswer = (event) => {
         if (!answer) {
@@ -52,9 +58,9 @@ const Flags = () => {
         //Compara a resposta em letras minúsculas e sem acentos ou caracteres especiais
         if (answer.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') === name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')) {
             setScore(score+1);
-            setCorrect(true)
+            setCorrect(true);
         }
-        else setCorrect(false)
+        else setCorrect(false);
         //Reseta o input de resposta
         setAnswer('');
         setLoading(true);
@@ -70,7 +76,7 @@ const Flags = () => {
 
     //Se a imagem não existir, carrega uma imagem padrão
     const addDefaultSrc = (event) => {
-        event.target.src = NotFound
+        event.target.src = NotFound;
     }
 
     return(
