@@ -39,11 +39,10 @@ const Flags = () => {
 
     const getCountry = () => {
         setFlag("");
-        setPage(!page);
         let number = Math.floor(Math.random() * 250);
         axios.get('https://restcountries.eu/rest/v2/all')
           .then(result => {
-                setName(result.data[number].name);
+                setName(result.data[number].translations.pt);
                 setFlag(result.data[number].flag);
                 setPage(!page);
           })
