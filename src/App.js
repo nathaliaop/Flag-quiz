@@ -11,9 +11,9 @@ export default function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" children={<Home/>}/>
-          <Route path="/score" children={<Score/>}/>
-          <Route path="/flags/:id" children={<Flags/>}/>
+          <Route exact path='/' children={<Home/>}/>
+          <Route path='/score' children={<Score/>}/>
+          <Route path='/flags' children={<Flags/>}/>
         </Switch>
       </BrowserRouter>
     </div>

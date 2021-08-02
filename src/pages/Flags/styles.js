@@ -13,8 +13,7 @@ export const Title = styled.p`
     font-size: 30px;
     background-color: #CF9893;
     border-radius: 10px;
-    padding: 0.5rem 0rem;
-    margin: 1rem 1rem;
+    padding: 0.5rem 0.5rem;
 `
 
 export const Warn = styled.p`
@@ -32,31 +31,46 @@ export const Correct = styled.p`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 35px;
     background-color: #8377D1;
     border-radius: 10px;
-    margin: 3rem 1rem;
 `
 
 export const Image = styled.img`
     width: 20vw;
-    height: 35vh;
+    height: 30vh;
 `
+
+export const Question = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 95vh;
+    background-color: #8377D1;
+    margin: 0.4rem;
+    border-radius: 50px;
+    `
 
 export const Result = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 45%;
+    width: 50%;
     height: 95vh;
     background-color: #8377D1;
+    margin: 0.5rem;
+    border-radius: 50px;
     `
 
 export const Form = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0.5rem 0rem;
+    margin: 1rem 1rem;
 `
 
 export const Info = styled.div`
@@ -69,9 +83,8 @@ export const Score = styled.p`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 25px;
     background-color: #8377D1;
     border-radius: 10px;
-    padding: 0.5rem 0rem;
     margin: 1rem 1rem;
 `
