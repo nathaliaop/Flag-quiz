@@ -115,8 +115,8 @@ const Flags = () => {
                         </Styled.Form>
                     </Styled.Question>
                 :
-                            <Styled.Result>
-                                        <Styled.Info>
+                    <Styled.Result>
+                        <Styled.Info>
                             <Styled.Score>Pontuação: {score*100}/1000</Styled.Score>
                             <Styled.Score>Questões: {10 - questions}/10</Styled.Score>
                         </Styled.Info>
@@ -140,7 +140,7 @@ const Flags = () => {
                             </Link>
                         :
                         <div >
-                            {window.addEventListener("keydown", handleKeyDown)}
+                            {window.addEventListener('keydown', handleKeyDown)}
                             <Button onClick={() => getCountry()}>Próximo</Button>
                         </div>
                         }
