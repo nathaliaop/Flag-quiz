@@ -12,7 +12,7 @@ const Flags = () => {
     let number = Math.floor(Math.random() * 250);
     
     const [countries, ] = useContext(CountriesContext);
-    const [name, setName] = useState(countries[number].translations.pt);
+    const [name, setName] = useState(countries[number].translations.br);
     const [flag, setFlag] = useState(countries[number].flag);
     const [nextName, setNextName] = useState('');
     const [nextFlag, setNextFlag] = useState('');
@@ -63,7 +63,7 @@ const Flags = () => {
 
         //Carrega a próxima bandeira na página de resposta da bandeira anterior
         let number = Math.floor(Math.random() * 250);
-        setNextName(countries[number].translations.pt);
+        setNextName(countries[number].translations.br);
         setNextFlag(countries[number].flag);
     }
 
@@ -118,7 +118,7 @@ const Flags = () => {
                             <Styled.Result>
                                         <Styled.Info>
                             <Styled.Score>Pontuação: {score*100}/1000</Styled.Score>
-                            <Styled.Score>Questões: {11 - questions}/10</Styled.Score>
+                            <Styled.Score>Questões: {10 - questions}/10</Styled.Score>
                         </Styled.Info>
                         <Styled.Image src={flag}/>
 
