@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
+import { ScoreContext } from '../../context/ScoreContext';
 import Button from '../../components/Button';
 
 import * as Styled from './styles';
 
 const Score = () => {
-    const location = useLocation();
-    let score = location.state.score;
+    const [score, ] = useContext(ScoreContext);
 
     return(
         <Styled.Div>

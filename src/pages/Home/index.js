@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 import * as Styled from './styles';
 
 const Home = () => {
-    const [countries, setCountries] = useContext(CountriesContext);
+    const [ , setCountries] = useContext(CountriesContext);
 
     axios.get('https://restcountries.eu/rest/v2/all')
     .then(result => {

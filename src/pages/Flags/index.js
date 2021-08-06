@@ -9,10 +9,11 @@ import Input from '../../components/Input';
 import * as Styled from './styles';
 
 const Flags = () => {
-
+    let number = Math.floor(Math.random() * 250);
+    
     const [countries, ] = useContext(CountriesContext);
-    const [name, setName] = useState('');
-    const [flag, setFlag] = useState('');
+    const [name, setName] = useState(countries[number].translations.pt);
+    const [flag, setFlag] = useState(countries[number].flag);
     const [nextName, setNextName] = useState('');
     const [nextFlag, setNextFlag] = useState('');
     //Define se o que vai ser mostrado na tela é a pergunta ou a resposta
@@ -27,9 +28,6 @@ const Flags = () => {
     const [warn, setWarn] = useState(false);
 
     useEffect((page) => {
-        let number = Math.floor(Math.random() * 250);
-        setName(countries[number].translations.pt);
-        setFlag(countries[number].flag)
         setPage(!page);
     }, [])
 
@@ -70,7 +68,7 @@ const Flags = () => {
     }
 
     const handleKeyDown = (event) => {
-        if(event.key == 'Enter') {
+        if(event.key === 'Enter') {
             getCountry();
         }
     };
