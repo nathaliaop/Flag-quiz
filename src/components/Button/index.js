@@ -2,11 +2,9 @@ import React from 'react';
 
 import * as Styled from './styles';
 
-const Button = ({onClick, children}) => {
+const Button = ({...rest}) => {
     return (
-        <Styled.Button onClick={(event) => onClick(event)}>
-            {children}
-        </Styled.Button>
+        <Styled.Button {...rest}/>
     );
 };
 
