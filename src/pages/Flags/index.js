@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
+import { CountriesContext } from '../../context/CountriesContext';
 import Loading from '../../images/loading.gif';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -10,6 +10,7 @@ import * as Styled from './styles';
 
 const Flags = () => {
 
+    const [countries, ] = useContext(CountriesContext);
     const [name, setName] = useState('');
     const [flag, setFlag] = useState('');
     const [nextName, setNextName] = useState('');
@@ -27,15 +28,9 @@ const Flags = () => {
 
     useEffect((page) => {
         let number = Math.floor(Math.random() * 250);
-        axios.get('https://restcountries.eu/rest/v2/all')
-          .then(result => {
-                setName(result.data[number].translations.pt);
-                setFlag(result.data[number].flag);
-                setPage(!page);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        setName(countries[number].translations.pt);
+        setFlag(countries[number].flag)
+        setPage(!page);
     }, [])
 
     const getCountry = () => {
@@ -70,15 +65,16 @@ const Flags = () => {
 
         //Carrega a próxima bandeira na página de resposta da bandeira anterior
         let number = Math.floor(Math.random() * 250);
-        axios.get('https://restcountries.eu/rest/v2/all')
-            .then(result => {
-                setNextName(result.data[number].translations.pt);
-                setNextFlag(result.data[number].flag);
-            })
-            .catch(error => {
-                console.error(error);
-        });
+        setNextName(countries[number].translations.pt);
+        setNextFlag(countries[number].flag);
     }
+
+    const handleKeyDown = (event) => {
+        if(event.key == 'Enter') {
+            getCountry();
+        }
+    };
+
 
     //Verifica se a imagem já carregou
     const [loading, setLoading] = useState(true);
@@ -107,7 +103,7 @@ const Flags = () => {
                         <div style={{display: loading ? 'none' : 'flex'}}>
                             <Styled.Image src={flag} onLoad={imageLoaded} onError={addDefaultSrc}/>
                         </div>
-                        <Styled.Form>
+                        <Styled.Form onSubmit={(event) => validateAnswer(event)}>
                             <Input
                                 type='text'
                                 placeholder='Resposta'
@@ -117,7 +113,7 @@ const Flags = () => {
 
                             {warn ? <Styled.Warn>Por favor, insira uma resposta!</Styled.Warn> : null}
 
-                            <Button onClick={(event) => validateAnswer(event)}>Conferir</Button>
+                            <Button type='submit'>Conferir</Button>
                         </Styled.Form>
                     </Styled.Question>
                 :
@@ -142,10 +138,13 @@ const Flags = () => {
 
                         {questions === 0 ?
                             <Link to={{pathname: '/score', state: { score: score }}}>
-                                <Button onClick={() => null}>Terminar jogo</Button>
+                                <Button>Terminar jogo</Button>
                             </Link>
                         :
+                        <div >
+                            {window.addEventListener("keydown", handleKeyDown)}
                             <Button onClick={() => getCountry()}>Próximo</Button>
+                        </div>
                         }
 
                     </Styled.Result>

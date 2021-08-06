@@ -77,7 +77,7 @@ export const Result = styled.div`
     padding: 0.5rem 0rem;
 `
 
-export const Form = styled.div`
+export const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
