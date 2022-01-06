@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../services/api';
 
 import { CountriesContext } from '../../context/CountriesContext';
 import Button from '../../components/Button';
@@ -10,7 +10,7 @@ import * as Styled from './styles';
 const Home = () => {
     const [ , setCountries] = useContext(CountriesContext);
 
-    axios.get('https://restcountries.com/v3.1/all')
+    api.get('/all')
     .then(result => {
         setCountries(result.data);
     })
